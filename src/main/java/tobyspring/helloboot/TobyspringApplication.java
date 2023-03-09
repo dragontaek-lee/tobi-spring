@@ -36,8 +36,7 @@ public class TobyspringApplication {
                         HelloController helloController = applicationContext.getBean(HelloController.class);
                         String ret = helloController.hello(name);
 
-                        resp.setStatus(HttpStatus.OK.value());
-                        resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE);
+                        resp.setContentType(MediaType.TEXT_PLAIN_VALUE);
                         resp.getWriter().println(ret);
                     } else if (req.getRequestURI().equals("/user")) {
                         //
