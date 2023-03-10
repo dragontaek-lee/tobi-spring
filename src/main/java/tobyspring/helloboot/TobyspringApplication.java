@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.context.support.GenericWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
 @Configuration
@@ -22,8 +21,11 @@ public class TobyspringApplication {
     public DispatcherServlet dispatcherServlet() {
         return new DispatcherServlet();
     }
-
     public static void main(String[] args) {
+        run(TobyspringApplication.class, args);
+    }
+
+    public static void run(Class<?> applicationClass, String... args) {
         AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext() {
             @Override
             protected void onRefresh() {
@@ -41,7 +43,7 @@ public class TobyspringApplication {
                 webServer.start();
             }
         };
-        applicationContext.register(TobyspringApplication.class);
+        applicationContext.register(applicationClass);
         applicationContext.refresh();
     }
 
